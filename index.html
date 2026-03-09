@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>conecta — Tu negocio organizado en un solo sistema. Implementación Odoo para PYMEs.</title>
+  <meta name="description" content="Equipo independiente de especialistas Odoo. Implementaciones a medida, con presupuesto transparente y trato directo. Agenda tu consultoría gratuita." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://conecta.sh/" />
+  <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="conecta" />
+  <meta property="og:title" content="conecta — Implementación Odoo para PYMEs" />
+  <meta property="og:description" content="Equipo independiente de especialistas Odoo. Implementaciones a medida, con presupuesto transparente y trato directo." />
+  <meta property="og:url" content="https://conecta.sh/" />
+  <meta property="og:image" content="https://conecta.sh/og-cover.svg" />
+  <meta property="og:image:type" content="image/svg+xml" />
+  <meta property="og:image:alt" content="conecta - Implementación Odoo para PYMEs" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="conecta — Implementación Odoo para PYMEs" />
+  <meta name="twitter:description" content="Equipo independiente de especialistas Odoo. Implementaciones a medida, con presupuesto transparente y trato directo." />
+  <meta name="twitter:image" content="https://conecta.sh/og-cover.svg" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "conecta",
+      "url": "https://conecta.sh/",
+      "email": "somosconecta.sh@gmail.com",
+      "description": "Equipo independiente de especialistas Odoo para implementaciones a medida en PYMEs.",
+      "sameAs": []
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "conecta",
+      "url": "https://conecta.sh/",
+      "inLanguage": "es"
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Vercel Speed Insights -->
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2G82GXFMCF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2G82GXFMCF');
+  </script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#" class="navbar__logo">
+        <img src="assets/icons/favicon-v2-conecta.png" alt="conecta" class="brand-mark" width="24" height="24" />
+        <span>conecta</span>
+      </a>
+      <ul class="navbar__links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#ventaja">Nuestra ventaja</a></li>
+        <li><a href="#contacto" class="btn btn--sm btn--primary">Agendar reunión</a></li>
+      </ul>
+      <button class="navbar__toggle" id="navToggle" aria-label="Menú">
+        <i class="ph ph-list"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 1 · HERO
+       Objetivo: Captar atención inmediata. Hablarle al dolor
+       del dueño de PYME. CTA principal.
+       Diseño: Fondo degradado oscuro (azul petróleo → negro),
+       terminal/código en segundo plano sutil. Texto grande,
+       limpio, con un CTA naranja vibrante.
+       ═══════════════════════════════════════════════════════ -->
+  <header class="hero" id="hero">
+    <div class="container hero__content">
+      <p class="hero__tag"><i class="ph ph-terminal-window"></i> Equipo de especialistas</p>
+      <h1 class="hero__title">
+        Tu PYME merece un sistema donde ventas, inventario y contabilidad<br />
+        <span class="highlight">hablen el mismo idioma.</span><br />
+        Sin intermediarios.
+      </h1>
+      <p class="hero__subtitle">
+        Somos un equipo de expertos que implementa, personaliza y despliega
+        <span class="odoo-inline-help" id="odooInlineHelpWrap">
+          <button type="button" class="odoo-inline-trigger" id="odooInlineHelpBtn" aria-expanded="false" aria-controls="odooInlineHelpPopover">Odoo</button>
+          <span class="odoo-inline-popover" id="odooInlineHelpPopover" role="tooltip" aria-hidden="true">Es un software de gestión (ERP) todo en uno. Unifica tus ventas, inventario, compras y contabilidad en una sola plataforma. Es modular: empiezas con lo que necesitas hoy y agregas más aplicaciones a medida que tu PYME crece. Todo conectado y sin datos duplicados.</span>
+        </span>
+        <strong>directamente para ti</strong>. Sin costos ocultos,
+        sin vendedores que desaparecen después de la firma. Solo soluciones
+        reales, trato directo y un teléfono que siempre contesta.
+      </p>
+      <div class="hero__cta-group">
+        <a href="#contacto" class="btn btn--primary btn--lg">
+          <i class="ph ph-calendar-check"></i> Agendar consultoría gratuita
+        </a>
+        <a href="#problema" class="btn btn--ghost btn--lg">
+          <i class="ph ph-arrow-down"></i> Ver por qué somos diferentes
+        </a>
+
+      </div>
+      <div class="hero__proof">
+        <div class="proof-item">
+          <strong>+50</strong>
+          <span>Implementaciones exitosas</span>
+        </div>
+        <div class="proof-item">
+          <strong>v13 → v19</strong>
+          <span>Todas las versiones</span>
+        </div>
+        <div class="proof-item">
+          <strong>100%</strong>
+          <span>Tu infraestructura</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 2 · PROBLEMA / SOLUCIÓN
+       Objetivo: Conectar con la frustración real del dueño.
+       Mostrar empatía y luego posicionar la solución.
+       Diseño: Dos columnas. Izquierda: lista de dolores con
+       íconos rojos. Derecha: soluciones con íconos verdes.
+       Fondo blanco, separación visual clara.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="problem-section" id="problema">
+    <div class="container">
+      <p class="section-tag">El problema real</p>
+      <h2 class="section-title">
+        ¿Tu negocio sigue atrapado en hojas de Excel,<br />
+        WhatsApps para pedidos y sistemas que no se conectan?
+      </h2>
+      <p class="section-subtitle">
+        No eres el único. La mayoría de PYMEs en LATAM operan con herramientas que ya les quedaron chicas. 
+        Y cuando buscan una solución profesional, se encuentran con esto:
+      </p>
+
+      <div class="problem-grid">
+        <!-- Columna PROBLEMAS -->
+        <div class="problem-card problem-card--pain">
+          <h3><i class="ph ph-warning-circle"></i> Lo que probablemente estás viviendo</h3>
+          <ul class="check-list check-list--red">
+            <li>
+              <i class="ph ph-x-circle"></i>
+              <span><strong>Excel como sistema central.</strong> Inventarios en una hoja, ventas en otra, contabilidad en otra. Nada cuadra nunca.</span>
+            </li>
+            <li>
+              <i class="ph ph-x-circle"></i>
+              <span><strong>Presupuestos que no encajan.</strong> Las agencias tradicionales manejan estructuras pensadas para grandes corporaciones, con costos que no se ajustan a tu realidad.</span>
+            </li>
+            <li>
+              <i class="ph ph-x-circle"></i>
+              <span><strong>Consultores que desaparecen.</strong> Te venden un proyecto enorme y luego no hay quién responda cuando surge un problema.</span>
+            </li>
+            <li>
+              <i class="ph ph-x-circle"></i>
+              <span><strong>Cero control.</strong> Tu sistema está en servidores ajenos, con credenciales que ni conoces y código que no puedes tocar.</span>
+            </li>
+            <li>
+              <i class="ph ph-x-circle"></i>
+              <span><strong>Integraciones a medias.</strong> Facturación electrónica, pasarelas de pago... todo queda "pendiente".</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Columna SOLUCIÓN -->
+        <div class="problem-card problem-card--solution">
+          <h3><i class="ph ph-check-circle"></i> Lo que obtienes con nosotros</h3>
+          <ul class="check-list check-list--green">
+            <li>
+              <i class="ph ph-check-circle"></i>
+              <span><strong>Un sistema real, integrado.</strong> Ventas, inventario, compras, contabilidad y CRM en un solo lugar, funcionando.</span>
+            </li>
+            <li>
+              <i class="ph ph-check-circle"></i>
+              <span><strong>Presupuesto transparente.</strong> Te decimos exactamente cuánto cuesta, qué incluye y qué no. Sin sorpresas.</span>
+            </li>
+            <li>
+              <i class="ph ph-check-circle"></i>
+              <span><strong>Hablas con el desarrollador, no con un vendedor.</strong> El que te asesora es el mismo que escribe el código. Punto.</span>
+            </li>
+            <li>
+              <i class="ph ph-check-circle"></i>
+              <span><strong>Tu servidor, tus datos, tus reglas.</strong> Tú eres dueño de todo.</span>
+            </li>
+            <li>
+              <i class="ph ph-check-circle"></i>
+              <span><strong>Integraciones que funcionan.</strong> Desarrollo de integraciones a medida. Lo hacemos de verdad.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 3 · "EL ELEFANTE EN LA HABITACIÓN"
+       Objetivo: Abordar de frente la objeción "¿pero no son
+       Partner oficial?" y convertirla en ventaja competitiva.
+       Diseño: Fondo oscuro diferenciado. Ícono de elefante
+       o signo de interrogación grande. Tabla comparativa
+       minimalista Partner vs Nosotros.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="elephant-section" id="ventaja">
+    <div class="container">
+      <div class="elephant__header">
+        <p class="section-tag section-tag--light">Nuestro modelo de trabajo</p>
+        <h2 class="section-title section-title--light">
+          "¿Si no son Partners oficiales de Odoo,<br />
+          cómo me garantizan calidad?"
+        </h2>
+        <p class="section-subtitle section-subtitle--light">
+          Buena pregunta. Nos la hacen siempre y nos encanta responderla. 
+          Las agencias tradicionales (Partners) tienen estructuras diseñadas para grandes corporaciones. 
+          Nosotros tenemos un <strong>modelo boutique y ágil</strong>, diseñado específicamente para la realidad de una PYME.
+          Esto es lo que significa en la práctica:
+        </p>
+      </div>
+
+      <div class="comparison-table">
+        <div class="comparison-col comparison-col--partner">
+          <div class="comparison-header">
+            <i class="ph ph-buildings"></i>
+            <h4>Agencia tradicional (Partner)</h4>
+          </div>
+          <ul>
+            <li><i class="ph ph-x"></i> <span>Modelo pensado para grandes corporaciones, con cuotas y licencias que no siempre necesitas</span></li>
+            <li><i class="ph ph-x"></i> <span>Estructuras de costos que incluyen membresías y overhead corporativo</span></li>
+            <li><i class="ph ph-x"></i> <span>Tu proyecto pasa por varios niveles antes de llegar al equipo técnico</span></li>
+            <li><i class="ph ph-x"></i> <span>Opciones de hosting limitadas a plataformas específicas</span></li>
+            <li><i class="ph ph-x"></i> <span>Paquetes predefinidos con módulos que quizás no necesitas aún</span></li>
+            <li><i class="ph ph-x"></i> <span>Menor flexibilidad para migrar o llevarte tu proyecto si cambias de proveedor</span></li>
+          </ul>
+        </div>
+
+        <div class="comparison-divider">
+          <span>VS</span>
+        </div>
+
+        <div class="comparison-col comparison-col--us">
+          <div class="comparison-header">
+            <i class="ph ph-code"></i>
+            <h4>Nuestro equipo ágil</h4>
+          </div>
+          <ul>
+            <li><i class="ph ph-check"></i> <span>Te recomendamos Community o Enterprise según lo que <strong>realmente</strong> necesites</span></li>
+            <li><i class="ph ph-check"></i> <span>Presupuesto transparente: pagas desarrollo real, sin costos ocultos ni burocracia corporativa</span></li>
+            <li><i class="ph ph-check"></i> <span>Trato directo con el equipo de especialistas que construye tu solución</span></li>
+            <li><i class="ph ph-check"></i> <span>Desplegamos donde tú elijas: tu servidor, AWS, Digital Ocean, VPS propio</span></li>
+            <li><i class="ph ph-check"></i> <span>Implementación modular: empezamos por lo urgente, crecemos contigo</span></li>
+            <li><i class="ph ph-check"></i> <span>Tu código, tu base de datos, tu infraestructura. Si un día cambias de proveedor, te llevas todo</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="elephant__bottom">
+        <p>
+          <strong>En resumen:</strong> Las agencias tradicionales tienen un modelo válido para empresas grandes. 
+          Nosotros trabajamos <em>exclusivamente</em> para PYMEs, con un modelo ágil donde tu inversión se convierte 
+          directamente en resultados. Nuestra reputación se construye proyecto a proyecto.
+        </p>
+        <a href="#contacto" class="btn btn--primary btn--lg">
+          <i class="ph ph-chat-centered-dots"></i> Quiero entender mejor mi caso
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 4 · SERVICIOS
+       Objetivo: Mostrar capacidad técnica real sin abrumar.
+       Diseño: Grid de 6 tarjetas con íconos, título y
+       descripción corta. Estilo limpio, fondo claro.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="services-section" id="servicios">
+    <div class="container">
+      <p class="section-tag">Qué hacemos</p>
+      <h2 class="section-title">
+        Todo lo que necesitas para operar con Odoo.<br />
+        Nada que no necesites.
+      </h2>
+      <p class="section-subtitle">
+        No vendemos humo ni paquetes genéricos. Cada proyecto se diseña 
+        alrededor de <em>tu</em> operación real.
+      </p>
+
+      <div class="services-grid">
+        <!-- Servicio 1 -->
+        <div class="service-card">
+          <div class="service-card__icon">
+            <i class="ph ph-rocket-launch"></i>
+          </div>
+          <h3>Implementación desde cero</h3>
+          <p>
+            Levantamos tu Odoo desde la primera configuración hasta la puesta en marcha. 
+            Ventas, inventario, compras, contabilidad, manufactura — lo que tu negocio pida.
+          </p>
+        </div>
+
+        <!-- Servicio 2 -->
+        <div class="service-card">
+          <div class="service-card__icon">
+            <i class="ph ph-arrows-clockwise"></i>
+          </div>
+          <h3>Migración de versiones</h3>
+          <p>
+            ¿Atrapado en versiones viejas? Migramos tu instancia a la última versión estable 
+            sin perder datos, personalizaciones ni la cordura en el proceso.
+          </p>
+        </div>
+
+        <!-- Servicio 3 -->
+        <div class="service-card">
+          <div class="service-card__icon">
+            <i class="ph ph-plugs-connected"></i>
+          </div>
+          <h3>Integraciones</h3>
+          <p>
+            Facturación electrónica (AFIP, SAT, DIAN), 
+            pasarelas de pagos, APIs de terceros. Lo conectamos de verdad, no con parches.
+          </p>
+        </div>
+
+        <!-- Servicio 4 -->
+        <div class="service-card">
+          <div class="service-card__icon">
+            <i class="ph ph-wrench"></i>
+          </div>
+          <h3>Desarrollo a medida</h3>
+          <p>
+            Módulos personalizados, reportes específicos, flujos de trabajo únicos. 
+            Si Odoo no lo hace de fábrica, nosotros lo construimos.
+          </p>
+        </div>
+
+        <!-- Servicio 5 -->
+        <div class="service-card">
+          <div class="service-card__icon">
+            <i class="ph ph-hard-drives"></i>
+          </div>
+          <h3>Infraestructura y servidores</h3>
+          <p>
+            Tu sistema siempre rápido, seguro y con copias de respaldo automáticas. 
+            Nosotros manejamos los servidores para que tú te enfoques en vender.
+          </p>
+        </div>
+
+        <!-- Servicio 6 -->
+        <div class="service-card">
+          <div class="service-card__icon">
+            <i class="ph ph-lifebuoy"></i>
+          </div>
+          <h3>Soporte y evolución continua</h3>
+          <p>
+            Planes de soporte mensual accesibles. Actualizaciones, nuevos módulos, 
+            ajustes, capacitación. Estamos ahí cuando nos necesites.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 5 · BENEFICIOS / POR QUÉ ELEGIRNOS
+       Objetivo: Reforzar diferenciadores emocionales.
+       Diseño: 3 bloques horizontales con ícono grande a la
+       izquierda y texto a la derecha. Fondo gris muy claro.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="benefits-section">
+    <div class="container">
+      <p class="section-tag">Por qué elegirnos</p>
+      <h2 class="section-title">
+        Trabajar con nosotros se siente diferente.<br />
+        Y los resultados también.
+      </h2>
+
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-item__icon">
+            <i class="ph ph-handshake"></i>
+          </div>
+          <div class="benefit-item__text">
+            <h3>Trato directo, sin filtros</h3>
+            <p>
+              Tu interlocutor no es un ejecutivo de cuenta que lee un script. 
+              Es un desarrollador que entiende tu problema, lo traduce a código y lo resuelve. 
+              Sin teléfono descompuesto, sin "le paso su caso al área técnica".
+            </p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-item__icon">
+            <i class="ph ph-piggy-bank"></i>
+          </div>
+          <div class="benefit-item__text">
+            <h3>Presupuesto justo y transparente</h3>
+            <p>
+              Nuestro modelo ágil no tiene los costos de estructura de una agencia tradicional. 
+              Lo que pagas se transforma en horas de desarrollo real sobre tu proyecto. 
+              Así de simple.
+            </p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-item__icon">
+            <i class="ph ph-shield-check"></i>
+          </div>
+          <div class="benefit-item__text">
+            <h3>Libertad tecnológica total</h3>
+            <p>
+              Tu código fuente es tuyo. Tu base de datos es tuya. Tu servidor es tuyo. 
+              Si mañana quieres cambiar de proveedor o administrarlo internamente, 
+              lo haces sin pedir permiso a nadie. Esa es la verdadera independencia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 6 · PROCESO DE TRABAJO
+       Objetivo: Reducir incertidumbre. Mostrar que hay un
+       método claro y profesional.
+       Diseño: Timeline horizontal/vertical con 4 pasos
+       numerados. Fondo blanco.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="process-section">
+    <div class="container">
+      <p class="section-tag">Cómo trabajamos</p>
+      <h2 class="section-title">De la primera llamada al go-live en 4 pasos claros</h2>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-step__number">01</div>
+          <h3>Diagnóstico gratuito</h3>
+          <p>
+            Nos cuentas cómo opera tu negocio hoy. Entendemos tus procesos, 
+            frustraciones y objetivos. Sin compromiso, sin presión de venta.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">02</div>
+          <h3>Propuesta a tu medida</h3>
+          <p>
+            Diseñamos un plan de implementación con alcance, tiempos y costos 
+            transparentes. Tú apruebas antes de que escribamos una línea de código.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">03</div>
+          <h3>Desarrollo e implementación</h3>
+          <p>
+            Configuramos, desarrollamos y desplegamos en sprints cortos con demos 
+            semanales. Ves el avance real, opinas y ajustamos en el camino.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">04</div>
+          <h3>Go-live y acompañamiento</h3>
+          <p>
+            Salimos a producción contigo. Capacitamos a tu equipo, monitoreamos 
+            la estabilidad y quedamos disponibles para soporte continuo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 8 · TECNOLOGÍAS
+       Objetivo: Refuerzo de credibilidad técnica visual.
+       Diseño: Logos de tecnologías en fila, estilo minimal.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="tech-section">
+    <div class="container">
+      <p class="tech-section__label">Tecnologías que respaldan tu operación</p>
+      <div class="tech-logos">
+        <div class="tech-logo-item">
+          <span class="tech-icon">🐍</span>
+          <span>Python</span>
+        </div>
+        <div class="tech-logo-item">
+          <span class="tech-icon"><i class="ph ph-file-js"></i></span>
+          <span>JavaScript</span>
+        </div>
+        <div class="tech-logo-item">
+          <span class="tech-icon">🐘</span>
+          <span>PostgreSQL</span>
+        </div>
+        <div class="tech-logo-item">
+          <span class="tech-icon">🐳</span>
+          <span>Docker</span>
+        </div>
+        <div class="tech-logo-item">
+          <span class="tech-icon">🐧</span>
+          <span>Linux</span>
+        </div>
+        <div class="tech-logo-item">
+          <span class="tech-icon">⚡</span>
+          <span>Nginx</span>
+        </div>
+        <div class="tech-logo-item">
+          <span class="tech-icon"><i class="ph ph-git-branch"></i></span>
+          <span>Git</span>
+        </div>
+        <div class="tech-logo-item">
+          <span class="tech-icon odoo-icon-wrap"><svg viewBox="0 0 28 28" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><rect width="28" height="28" rx="6" fill="#714B67"/><circle cx="14" cy="14" r="8" stroke="#fff" stroke-width="4" fill="none"/></svg></span>
+          <span>Odoo</span>
+        </div>
+        <div class="tech-logo-item">
+          <span class="tech-icon">🌐</span>
+          <span>REST APIs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 9 · TESTIMONIOS / SOCIAL PROOF (placeholder)
+       Objetivo: Refuerzo de confianza con opiniones reales.
+       Diseño: Carrusel minimal con quote, nombre y empresa.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="testimonials-section">
+    <div class="container">
+      <p class="section-tag">Lo que dicen nuestros clientes</p>
+      <h2 class="section-title">Resultados reales, no promesas de PowerPoint</h2>
+
+      <div class="testimonials-grid">
+        <blockquote class="testimonial-card">
+          <p>
+            "Llevábamos 2 años intentando implementar Odoo con otra agencia y nunca terminaba. 
+            Estos chicos lo levantaron en 6 semanas y funciona mejor de lo que esperábamos."
+          </p>
+          <footer>
+            <strong>— Dueño de PYME, Sector Retail</strong>
+          </footer>
+        </blockquote>
+
+        <blockquote class="testimonial-card">
+          <p>
+            "Lo que más valoro es que cuando tengo un problema, escribo y me responde 
+            directamente el desarrollador que conoce mi sistema. Eso no tiene precio."
+          </p>
+          <footer>
+            <strong>— Gerente de Operaciones, Distribuidora</strong>
+          </footer>
+        </blockquote>
+
+        <blockquote class="testimonial-card">
+          <p>
+            "Nos asesoraron honestamente sobre qué versión necesitábamos y con el ahorro 
+            financiamos un módulo a medida que era clave para nuestra operación. Excelente decisión."
+          </p>
+          <footer>
+            <strong>— CFO, Empresa de Servicios</strong>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 10 · FAQ
+       Objetivo: Resolver objeciones finales antes del CTA.
+       Diseño: Acordeón simple, fondo blanco.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="faq-section">
+    <div class="container">
+      <p class="section-tag">Preguntas frecuentes</p>
+      <h2 class="section-title">Antes de que preguntes…</h2>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>¿Odoo Community es suficiente para mi empresa?</summary>
+          <p>
+            En la mayoría de los casos, sí. Odoo Community cubre ventas, inventario, compras, 
+            CRM, contabilidad y más. Lo que le falta de fábrica (como reportes avanzados o 
+            contabilidad analítica), lo desarrollamos a medida por una fracción del costo de Enterprise. 
+            Y si realmente necesitas Enterprise, te lo decimos honestamente.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cuánto cuesta una implementación?</summary>
+          <p>
+            Depende del alcance, pero para darte una referencia: una implementación básica 
+            (ventas + inventario + contabilidad) para una PYME típica puede arrancar desde 
+            USD $2,000-$8,000. Te damos un presupuesto detallado después del diagnóstico gratuito.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Qué pasa si necesito soporte después de la implementación?</summary>
+          <p>
+            Ofrecemos planes de soporte mensual con horas de desarrollo y atención incluidas. 
+            También puedes contratarnos por ticket o por hora según necesites. No te dejamos solo.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Pueden migrar mi sistema actual a Odoo?</summary>
+          <p>
+            Sí. Hemos migrado empresas desde Excel, sistemas legacy, otros ERPs y desde 
+            versiones antiguas de Odoo. Hacemos un mapeo completo de datos y validamos 
+            todo antes de la migración final.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Tienen la capacidad para manejar mi proyecto?</summary>
+          <p>
+            Ser un equipo ágil es una fortaleza, no una limitación. Cero burocracia, 
+            decisiones rápidas, comunicación directa. Manejamos proyectos de forma modular 
+            y escalamos según la complejidad. Si un proyecto requiere más especialistas, 
+            contamos con colaboradores de confianza para reforzar el equipo.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECCIÓN 11 · CTA FINAL
+       Objetivo: Cierre fuerte. Una sola acción: agendar.
+       Diseño: Fondo con degradado llamativo, texto grande,
+       botón prominente. Sin distracciones.
+       ═══════════════════════════════════════════════════════ -->
+  <section class="cta-section" id="contacto">
+    <div class="container cta-section__inner">
+      <h2 class="cta-section__title">
+        Tu empresa ya dio el primer paso:<br />
+        llegaste hasta aquí.
+      </h2>
+      <p class="cta-section__subtitle">
+        Agenda una videollamada de 30 minutos con nosotros. Sin costo, sin compromiso, 
+        sin PowerPoints de 50 slides. Te escuchamos, analizamos tu caso y te decimos 
+        honestamente si podemos ayudarte — y cuánto costaría.
+      </p>
+      <div class="cta-section__actions">
+        <a href="https://calendly.com/somosconecta-sh/30min" target="_blank" rel="noopener" class="btn btn--primary btn--xl">
+          <i class="ph ph-video-camera"></i> Agendar mi consultoría gratuita
+        </a>
+        <p class="cta-section__note">
+          <i class="ph ph-clock"></i> Respondemos en menos de 24 horas. 
+          <a href="mailto:somosconecta.sh@gmail.com">somosconecta.sh@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="navbar__logo">
+          <img src="assets/icons/favicon-v2-conecta.png" alt="conecta" class="brand-mark" width="24" height="24" />
+          <span>conecta</span>
+        </a>
+        <p>Tu negocio organizado en un solo sistema.<br/>Implementaciones reales, trato directo.</p>
+      </div>
+      <div class="footer__links">
+        <h4>Navegación</h4>
+        <a href="#servicios">Servicios</a>
+        <a href="#ventaja">Nuestra ventaja</a>
+      </div>
+      <div class="footer__links">
+        <h4>Contacto</h4>
+        <a href="mailto:somosconecta.sh@gmail.com">somosconecta.sh@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p>&copy; 2026 conecta. Todos los derechos reservados. Odoo es una marca registrada de Odoo S.A.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

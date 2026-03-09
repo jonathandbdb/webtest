@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">conecta - Implementación Odoo para PYMEs</title>
+  <desc id="desc">Tu negocio organizado en un solo sistema.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#805a77" />
+      <stop offset="100%" stop-color="#714B67" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Brand tile inspired by selected favicon -->
+  <g transform="translate(880 115)">
+    <rect width="220" height="220" rx="48" fill="url(#tile)" />
+    <path d="M62 110 A48 48 0 0 1 158 110" fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+    <path d="M158 110 A48 48 0 0 1 62 110" fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+    <rect x="60" y="98" width="54" height="24" rx="8" fill="#ffffff"/>
+    <rect x="104" y="94" width="30" height="32" rx="10" fill="#ffffff"/>
+    <rect x="127" y="97" width="26" height="8" rx="4" fill="#ffffff"/>
+    <rect x="127" y="115" width="26" height="8" rx="4" fill="#ffffff"/>
+  </g>
+
+  <text x="90" y="250" font-family="Inter, Arial, sans-serif" font-size="78" font-weight="800" fill="#ffffff">&lt;conecta/&gt;</text>
+  <text x="90" y="340" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="600" fill="#f97316">Implementación Odoo para PYMEs</text>
+  <text x="90" y="410" font-family="Inter, Arial, sans-serif" font-size="30" fill="#cbd5e1">Tu negocio organizado en un solo sistema.</text>
+  <circle cx="1060" cy="420" r="8" fill="#22c55e" />
+  <text x="1080" y="428" font-family="JetBrains Mono, monospace" font-size="18" fill="#86efac">status: online</text>
+</svg>
