@@ -1,82 +1,117 @@
 /* ═══════════════════════════════════════════════════════
-   LANDING PAGE — JavaScript
-   Menu toggle + Smooth interactions
+   CONECTA — JavaScript (TechEdge template adapted)
+   Sticky header, offcanvas, WOW, counters, scroll, GA4
    ═══════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ─── Mobile nav toggle ───
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.querySelector('.navbar__links');
-
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      const isOpen = navLinks.classList.contains('active');
-      navToggle.innerHTML = isOpen
-        ? '<i class="ph ph-x"></i>'
-        : '<i class="ph ph-list"></i>';
-    });
-
-    // Close menu when clicking a link
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        navToggle.innerHTML = '<i class="ph ph-list"></i>';
-      });
-    });
-  }
-
-  // ─── Navbar background on scroll ───
-  const navbar = document.getElementById('navbar');
-  if (navbar) {
+  // ─── Sticky Header ───
+  const header = document.getElementById('header-sticky');
+  if (header) {
     const onScroll = () => {
-      if (window.scrollY > 60) {
-        navbar.style.background = 'rgba(11, 17, 32, 0.95)';
-      } else {
-        navbar.style.background = 'rgba(11, 17, 32, 0.85)';
-      }
+      header.classList.toggle('sticky', window.scrollY > 250);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
 
-  // ─── Intersection Observer for fade-in animations ───
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+  // ─── Mobile Offcanvas Menu ───
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+
+  const openMenu = () => {
+    if (mobileMenu) mobileMenu.classList.add('opened');
+    if (mobileOverlay) mobileOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
   };
 
-  const animatedElements = document.querySelectorAll(
-    '.service-card, .benefit-item, .process-step, .testimonial-card, .faq-item, .problem-card, .comparison-col'
-  );
+  const closeMenu = () => {
+    if (mobileMenu) mobileMenu.classList.remove('opened');
+    if (mobileOverlay) mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
 
-  // Reset initial state
-  animatedElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  if (navToggle) navToggle.addEventListener('click', openMenu);
+  if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
+  if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
+
+  // Cerrar menú al hacer click en un link
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Add a staggered delay based on sibling index
-        const parent = entry.target.parentElement;
-        const siblings = Array.from(parent.children);
-        const index = siblings.indexOf(entry.target);
-        
-        setTimeout(() => {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }, index * 80);
+  // ─── WOW.js Animations ───
+  if (typeof WOW !== 'undefined') {
+    new WOW({ offset: 100, mobile: true }).init();
+  }
 
-        observer.unobserve(entry.target);
-      }
+  // ─── Counter Animation ───
+  const counters = document.querySelectorAll('.count');
+  let countersAnimated = false;
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-count'), 10);
+      if (isNaN(target)) return;
+      const duration = 2000;
+      const start = performance.now();
+
+      const step = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out quad
+        const eased = 1 - (1 - progress) * (1 - progress);
+        counter.textContent = Math.floor(eased * target);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          counter.textContent = target;
+        }
+      };
+      requestAnimationFrame(step);
     });
-  }, observerOptions);
+  };
 
-  animatedElements.forEach(el => observer.observe(el));
+  if (counters.length) {
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !countersAnimated) {
+          countersAnimated = true;
+          animateCounters();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    counters.forEach(c => counterObserver.observe(c));
+  }
+
+  // ─── Back to Top Button ───
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    const progressPath = backToTop.querySelector('path');
+    const pathLength = progressPath ? 307.919 : 0;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+      // Mostrar/ocultar botón
+      backToTop.classList.toggle('active', scrollTop > 300);
+
+      // Actualizar progreso del círculo
+      if (progressPath && docHeight > 0) {
+        const progress = pathLength - (scrollTop * pathLength / docHeight);
+        progressPath.style.strokeDashoffset = Math.max(0, progress);
+      }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   // ─── Smooth scroll for anchor links ───
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -108,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
           event_category: 'conversion',
           event_label: 'agendar_cta',
           cta_text: (link.textContent || '').trim(),
-          section: link.closest('nav') ? 'navbar' : (link.closest('.hero') ? 'hero' : 'page')
+          section: link.closest('header') ? 'header' : (link.closest('.hero-section') ? 'hero' : 'page')
         });
       }
     });
@@ -181,39 +216,5 @@ document.addEventListener('DOMContentLoaded', () => {
       event_label: 'time_on_page_45s'
     });
   }, 45000);
-
-  // ─── Inline helper popover on word “Odoo” ───
-  const odooInlineWrap = document.getElementById('odooInlineHelpWrap');
-  const odooInlineBtn = document.getElementById('odooInlineHelpBtn');
-  const odooInlinePopover = document.getElementById('odooInlineHelpPopover');
-
-  if (odooInlineWrap && odooInlineBtn && odooInlinePopover) {
-    const setOpen = (open) => {
-      odooInlineWrap.classList.toggle('is-open', open);
-      odooInlineBtn.setAttribute('aria-expanded', String(open));
-      odooInlinePopover.setAttribute('aria-hidden', String(!open));
-    };
-
-    odooInlineBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const isOpen = odooInlineWrap.classList.contains('is-open');
-      setOpen(!isOpen);
-    });
-
-    odooInlinePopover.addEventListener('click', (e) => {
-      e.stopPropagation();
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!odooInlineWrap.contains(e.target)) {
-        setOpen(false);
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') setOpen(false);
-    });
-  }
 
 });
