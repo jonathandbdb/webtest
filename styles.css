@@ -1201,3 +1201,59 @@ section {
     border-radius: 5px;
   }
 }
+
+/* ── Tech Marquee Ticker ── */
+.tech-marquee-section {
+  background: #0D0D0D;
+  padding: 35px 0;
+  overflow: hidden;
+  margin-bottom: 60px;
+  border-top: 1px solid #D94814;
+  border-bottom: 1px solid #D94814;
+}
+.tech-marquee-label {
+  text-align: center;
+  font-size: 26px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 18px;
+  font-weight: 600;
+}
+.tech-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.tech-marquee-track {
+  display: flex;
+  gap: 56px;
+  width: max-content;
+  animation: techMarquee 30s linear infinite;
+}
+.tech-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  padding: 8px 0;
+}
+.tech-marquee-item i {
+  font-size: 30px;
+  color: #D94814;
+}
+@keyframes techMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (max-width: 768px) {
+  .tech-marquee-section { padding: 22px 0; }
+  .tech-marquee-track { gap: 36px; animation-duration: 20s; }
+  .tech-marquee-item { font-size: 17px; }
+  .tech-marquee-item i { font-size: 24px; }
+}
