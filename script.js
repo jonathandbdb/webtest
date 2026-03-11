@@ -275,4 +275,67 @@ document.addEventListener('DOMContentLoaded', () => {
     tStartAutoplay();
   }
 
+  // ─── Problem / Solution Dual Synchronized Sliders ───
+  const painTrack = document.getElementById('painTrack');
+  const solutionTrack = document.getElementById('solutionTrack');
+  const psSlideCount = document.querySelectorAll('#painTrack .ps-slide').length;
+
+  if (painTrack && solutionTrack && psSlideCount > 0) {
+    let psCurrent = 0;
+    let psAutoplay;
+
+    const painDots = document.querySelectorAll('#painDots .ps-dot');
+    const solutionDots = document.querySelectorAll('#solutionDots .ps-dot');
+
+    const psGoTo = (index) => {
+      psCurrent = (index + psSlideCount) % psSlideCount;
+      const offset = -(psCurrent * 100) + '%';
+      painTrack.style.transform = 'translateX(' + offset + ')';
+      solutionTrack.style.transform = 'translateX(' + offset + ')';
+      painDots.forEach((d, i) => d.classList.toggle('active', i === psCurrent));
+      solutionDots.forEach((d, i) => d.classList.toggle('active', i === psCurrent));
+    };
+
+    const psStartAutoplay = () => {
+      psAutoplay = setInterval(() => psGoTo(psCurrent + 1), 4500);
+    };
+    const psResetAutoplay = () => {
+      clearInterval(psAutoplay);
+      psStartAutoplay();
+    };
+
+    // Arrow listeners (both sliders share navigation)
+    document.querySelector('.pain-prev')?.addEventListener('click', () => { psGoTo(psCurrent - 1); psResetAutoplay(); });
+    document.querySelector('.pain-next')?.addEventListener('click', () => { psGoTo(psCurrent + 1); psResetAutoplay(); });
+    document.querySelector('.solution-prev')?.addEventListener('click', () => { psGoTo(psCurrent - 1); psResetAutoplay(); });
+    document.querySelector('.solution-next')?.addEventListener('click', () => { psGoTo(psCurrent + 1); psResetAutoplay(); });
+
+    // Dot listeners (both sets control both sliders)
+    painDots.forEach(dot => {
+      dot.addEventListener('click', () => { psGoTo(parseInt(dot.dataset.slide, 10)); psResetAutoplay(); });
+    });
+    solutionDots.forEach(dot => {
+      dot.addEventListener('click', () => { psGoTo(parseInt(dot.dataset.slide, 10)); psResetAutoplay(); });
+    });
+
+    // Touch / swipe on either slider
+    [document.getElementById('painSlider'), document.getElementById('solutionSlider')].forEach(el => {
+      if (!el) return;
+      let startX = 0;
+      let dragging = false;
+      el.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; dragging = true; }, { passive: true });
+      el.addEventListener('touchend', (e) => {
+        if (!dragging) return;
+        dragging = false;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          psGoTo(diff > 0 ? psCurrent + 1 : psCurrent - 1);
+          psResetAutoplay();
+        }
+      }, { passive: true });
+    });
+
+    psStartAutoplay();
+  }
+
 });
