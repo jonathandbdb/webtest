@@ -80,15 +80,15 @@ section {
 }
 @media (max-width: 575px) {
   .odoo-tooltip {
-    width: 260px;
-    left: 0;
-    transform: translateX(-20px) translateY(6px);
+    width: 280px;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
   }
   .odoo-tooltip-wrap:hover .odoo-tooltip {
-    transform: translateX(-20px) translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
   .odoo-tooltip::after {
-    left: 40px;
+    left: 50%;
   }
 }
 
