@@ -130,29 +130,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─── GA4 tracking helpers ───
   const track = (eventName, params = {}) => {
     if (typeof window.gtag === 'function') {
-      window.gtag('event', eventName, params);
+      window.gtag('event', eventName, {
+        transport_type: 'beacon',
+        ...params,
+      });
     }
   };
 
-  // 1) Conversion: generate_lead (CTA Agendar)
-  document.querySelectorAll('a[href="#contacto"]').forEach(link => {
+  // 1) Conversion: agendar_consultoria (click a Calendly)
+  document.querySelectorAll('a[href*="calendly.com"]').forEach(link => {
     link.addEventListener('click', () => {
-      const txt = (link.textContent || '').trim().toLowerCase();
-      if (txt.includes('agendar') || txt.includes('consultoría') || txt.includes('consultoria')) {
-        track('generate_lead', {
-          event_category: 'conversion',
-          event_label: 'agendar_cta',
-          cta_text: (link.textContent || '').trim(),
-          section: link.closest('header') ? 'header' : (link.closest('.hero-section') ? 'hero' : 'page')
-        });
-      }
+      track('agendar_consultoria', {
+        event_category: 'conversion',
+        event_label: 'calendly_click',
+        link_url: link.href,
+        link_text: (link.textContent || '').trim()
+      });
     });
   });
 
-  // 2) Conversion: contact_email_click
+  // 2) Conversion: correo (click en mailto)
   document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
     link.addEventListener('click', () => {
-      track('contact_email_click', {
+      track('correo', {
         event_category: 'conversion',
         event_label: 'email_click',
         email: (link.getAttribute('href') || '').replace('mailto:', ''),
@@ -161,7 +161,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3) Conversion: contact_section_view (view of #contacto)
+  // 3) Conversion: whatsapp (click a WhatsApp)
+  document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(link => {
+    link.addEventListener('click', () => {
+      track('whatsapp', {
+        event_category: 'conversion',
+        event_label: 'whatsapp_click',
+        link_url: link.href,
+        link_text: (link.textContent || '').trim() || 'whatsapp'
+      });
+    });
+  });
+
+  // 4) Conversion: contact_section_view (view of #contacto)
   const contactSection = document.getElementById('contacto');
   if (contactSection) {
     const contactObserver = new IntersectionObserver((entries, obs) => {
@@ -179,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contactObserver.observe(contactSection);
   }
 
-  // 4) Micro: scroll_75
+  // 5) Micro: scroll_75
   let scrollTracked = false;
   const onScrollDepth = () => {
     if (scrollTracked) return;
@@ -198,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('scroll', onScrollDepth, { passive: true });
 
-  // 5) Micro: cta_secondary_click ("Ver por qué somos diferentes")
+  // 6) Micro: cta_secondary_click ("Ver por qué somos diferentes")
   document.querySelectorAll('a[href="#problema"]').forEach(link => {
     link.addEventListener('click', () => {
       track('cta_secondary_click', {
@@ -209,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 6) Micro: engaged_45s
+  // 7) Micro: engaged_45s
   setTimeout(() => {
     track('engaged_45s', {
       event_category: 'micro_conversion',
